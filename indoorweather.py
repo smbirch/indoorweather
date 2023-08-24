@@ -3,6 +3,8 @@ import time
 import Adafruit_DHT
 import sds011
 
+# import outdoorweather
+
 
 def celsius_to_fahrenheit(degrees_celsius):
     return (degrees_celsius * 9 / 5) + 32
@@ -28,8 +30,7 @@ def get_tempandhumidity():
 
 
 def set_sdsstate(sds):
-    sds.set_working_period(rate=1)
-    return
+    sds.set_working_period(rate=0)
 
 
 # Get particulate matter
@@ -46,6 +47,7 @@ def main():
     while True:
         get_PM(sds)
         get_tempandhumidity()
+        # outdoorweather.get_current_weather()
 
 
 if __name__ == "__main__":
