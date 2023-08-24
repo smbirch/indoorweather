@@ -8,6 +8,7 @@ adafruit-dht = "*"
 prometheus-client = "*"
 sds011 = "*"
 pyserial = "*"
+pysds011 = "*"
 
 [dev-packages]
 

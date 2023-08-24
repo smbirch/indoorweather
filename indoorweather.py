@@ -1,5 +1,5 @@
 import time
-
+import serial
 import Adafruit_DHT
 import sds011
 
@@ -30,6 +30,7 @@ def get_tempandhumidity():
 
 
 def set_sdsstate(sds):
+    sds.sleep(sleep=True)
     sds.set_working_period(rate=0)
 
 
