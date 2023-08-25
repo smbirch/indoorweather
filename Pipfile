@@ -6,9 +6,9 @@ name = "pypi"
 [packages]
 adafruit-dht = "*"
 prometheus-client = "*"
-sds011 = "*"
 pyserial = "*"
-pysds011 = "*"
+python-aqi = "*"
+gevent = "*"
 
 [dev-packages]
 
