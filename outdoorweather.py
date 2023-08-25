@@ -17,8 +17,8 @@ def get_current_weather():
     temperature = data["main"]["temp"]
     humidity = data["main"]["humidity"]
 
-    print("Temperature:", temperature)
-    print("Humidity:", humidity)
+    print("Outdoor Temperature:", temperature)
+    print("Outdoor Humidity:", humidity)
 
 
 def get_current_aqi():

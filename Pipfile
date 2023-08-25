@@ -9,6 +9,7 @@ prometheus-client = "*"
 pyserial = "*"
 python-aqi = "*"
 gevent = "*"
+schedule = "*"
 
 [dev-packages]
 

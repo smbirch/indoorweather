@@ -60,25 +60,25 @@ def set_command(data_byte_1, data_byte_2, data_byte_3, data_byte_4, data_byte_5)
 # puts sensor to sleep
 def sensor_sleep():
     set_command(b"\x06", b"\x01", b"\x00", b"\x00", b"\x00")
-    print("Going to sleep")
+    # print("Going to sleep")
 
 
 # wake sensor from sleep and set to "work" mode
 def set_sensor_work():
     set_command(b"\x06", b"\x01", b"\x01", b"\x00", b"\x00")
-    print("Setting to work mode")
+    # print("Setting to work mode")
 
 
 # sets to active mode
 def set_reporting_mode():
     set_command(b"\x02", b"\x01", b"\x00", b"\x00", b"\x00")
-    print("Setting to active mode")
+    # print("Setting to active mode")
 
 
 # set working mode to "continuous"
 def set_working_period():
     set_command(b"\x08", b"\x01", b"\x00", b"\x00", b"\x00")
-    print("Setting working period")
+    # print("Setting working period")
 
 
 def get_data():
@@ -86,17 +86,17 @@ def get_data():
 
 
 def sensor_read():
-    for _ in range(3):
+    for _ in range(1):
         data = []
         get_data()
-        print("\nWaiting for data...\n")
+        # print("\nWaiting for data...\n")
         for _ in range(0, 10):
             datum = ser.read()
             data.append(datum)
         pmtwofive = int.from_bytes(b"".join(data[2:4]), byteorder="little") / 10
         pmten = int.from_bytes(b"".join(data[4:6]), byteorder="little") / 10
-        print(f"PM2.5: {pmtwofive}")
-        print(f"PM10: {pmten}")
+        print(f"Indoor PM2.5: {pmtwofive}")
+        print(f"Indoor PM10: {pmten}")
         aqi = convert_to_aqi(pmtwofive, pmten)
         print("Indoor AQI: ", aqi)
 
