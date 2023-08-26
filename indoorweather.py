@@ -1,6 +1,14 @@
 import time
 
 import Adafruit_DHT
+from prometheus_client import Gauge
+
+
+# Create Prometheus Gauges
+indoor_temperature_gauge = Gauge(
+    "indoor_temperature", "Indoor temperature in Fahrenheit"
+)
+indoor_humidity_gauge = Gauge("indoor_humidity", "Indoor humidity percentage")
 
 
 def celsius_to_fahrenheit(degrees_celsius):
@@ -20,6 +28,11 @@ def get_tempandhumidity():
         return
     temp_f = celsius_to_fahrenheit(temperature)
     print(f"Indoor Temp: {temp_f:.1f}\nIndoor Humidity: {humidity:.1f}")
+
+    # prometheus gauges
+    indoor_temperature_gauge.set(temp_f)
+    indoor_humidity_gauge.set(humidity)
+
     return temp_f, humidity
 
 
