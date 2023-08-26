@@ -12,6 +12,7 @@ import indoorweather
 
 def get_all_stats(greenlets):
     gevent.joinall(greenlets)
+    print("\n***\n")
 
 
 def main():
