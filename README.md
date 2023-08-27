@@ -40,3 +40,4 @@ The SDS011 also needs some time to clear out the sensor chamber before taking an
 
 
 
+![homepage](https://raw.githubusercontent.com/smbirch/indoorweather/main/media/grafana.png)
