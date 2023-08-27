@@ -5,11 +5,10 @@ name = "pypi"
 
 [packages]
 adafruit-dht = "*"
-prometheus-client = "*"
 pyserial = "*"
 python-aqi = "*"
 gevent = "*"
-schedule = "*"
+influxdb-client = "*"
 
 [dev-packages]
 

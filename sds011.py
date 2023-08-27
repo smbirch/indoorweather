@@ -2,12 +2,7 @@ import serial
 import time
 import aqi
 
-from prometheus_client import Gauge
-
-
-indoor_pm2_5_gauge = Gauge("indoor_pm2_5", "Indoor PM2.5 level")
-indoor_pm10_gauge = Gauge("indoor_pm10", "Indoor PM10 level")
-indoor_aqi_gauge = Gauge("indoor_aqi", "Indoor AQI value")
+import influx
 
 
 ser = serial.Serial()
@@ -17,6 +12,7 @@ ser.baudrate = 9600
 if ser.isOpen() == False:
     ser.open()
 ser.reset_input_buffer()
+time.sleep(0.1)
 ser.reset_output_buffer()
 
 
@@ -24,7 +20,9 @@ def send_command(bytes_data):
     if ser.isOpen() == False:
         ser.open()
     ser.reset_input_buffer()
+    time.sleep(0.1)
     ser.reset_output_buffer()
+    time.sleep(0.1)
     try:
         ser.write(bytes_data)
     except Exception as e:
@@ -101,9 +99,13 @@ def get_data():
 
 # need to flush input, getting same readings over x minutes
 def sensor_read():
+    ser.reset_input_buffer()
+    time.sleep(0.1)
+    ser.reset_output_buffer()
+    time.sleep(0.1)
     for _ in range(1):
         data = []
-        get_data()
+        # get_data()
         # print("\nWaiting for data...\n")
         for _ in range(0, 10):
             datum = ser.read()
@@ -115,24 +117,16 @@ def sensor_read():
         aqi = convert_to_aqi(pmtwofive, pmten)
         print("Indoor AQI: ", aqi)
 
-        indoor_pm2_5_gauge.set(pmtwofive)
-        indoor_pm10_gauge.set(pmten)
-        indoor_aqi_gauge.set(aqi)
+        influx.indoor_aqi(pmtwofive, pmten, aqi)
 
 
 def get_indoor_stats():
     set_sensor_work()
-    time.sleep(5)
-
-    set_reporting_mode()
-    time.sleep(5)
-
-    set_working_period()
-    time.sleep(5)
-
+    time.sleep(15)
     sensor_read()
-
+    time.sleep(2)
     sensor_sleep()
+    time.sleep(2)
     ser.close()
 
 
@@ -148,13 +142,11 @@ def convert_to_aqi(pmtwofive, pmten):
 
 def main():
     set_sensor_work()
-    time.sleep(5)
-    set_reporting_mode()
-    time.sleep(5)
-    set_working_period()
-    time.sleep(5)
+    time.sleep(15)
     sensor_read()
+    time.sleep(1)
     sensor_sleep()
+    time.sleep(1)
     ser.close()
 
 

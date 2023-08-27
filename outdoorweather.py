@@ -2,16 +2,7 @@ import requests
 import configparser
 import json
 
-from prometheus_client import Gauge
-
-# Prometheus gauges
-outdoor_temperature_gauge = Gauge(
-    "outdoor_temperature", "Outdoor temperature in Fahrenheit"
-)
-outdoor_humidity_gauge = Gauge("outdoor_humidity", "Outdoor humidity percentage")
-outdoor_pm2_5_gauge = Gauge("outdoor_pm2_5", "Outdoor PM2.5 level")
-outdoor_pm10_gauge = Gauge("outdoor_pm10", "Outdoor PM10 level")
-outdoor_aqi_gauge = Gauge("outdoor_aqi", "Outdoor AQI value")
+import influx
 
 
 def get_current_weather():
@@ -31,9 +22,7 @@ def get_current_weather():
     print("Outdoor Temperature:", temperature)
     print("Outdoor Humidity:", humidity)
 
-    # Set Prometheus Gauges
-    outdoor_temperature_gauge.set(temperature)
-    outdoor_humidity_gauge.set(humidity)
+    influx.outdoor_temp_humidity(temperature, humidity)
 
 
 def get_current_aqi():
@@ -55,10 +44,7 @@ def get_current_aqi():
     print("Outdoor PM10: ", pm10)
     print("Outdoor AQI: ", aqi)
 
-    # Set Prometheus Gauges
-    outdoor_pm2_5_gauge.set(pm2_5)
-    outdoor_pm10_gauge.set(pm10)
-    outdoor_aqi_gauge.set(aqi)
+    influx.outdoor_aqi(pm2_5, pm10, aqi)
 
 
 if __name__ == "__main__":

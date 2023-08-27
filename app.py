@@ -1,9 +1,8 @@
+import time
+import os
+
 import gevent
 from gevent import monkey
-import schedule
-import time
-
-from prometheus_client import start_http_server
 
 monkey.patch_all()
 
@@ -13,7 +12,6 @@ import indoorweather
 
 
 def get_all_stats():
-    print("starting greenlets")
     greenlets = [
         gevent.spawn(sds011.get_indoor_stats),
         gevent.spawn(indoorweather.get_tempandhumidity),
@@ -44,10 +42,7 @@ def scheduler(interval):
 
 
 def main():
-    # start prometheus server
-    start_http_server(9600)
-
-    scheduler(180)
+    scheduler(200)
 
 
 if __name__ == "__main__":
