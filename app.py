@@ -1,5 +1,5 @@
 import time
-import os
+import sys
 
 import gevent
 from gevent import monkey
@@ -12,6 +12,8 @@ import indoorweather
 
 
 def get_all_stats():
+    """Runs gevent greenlets and waits for completion"""
+    print(time.strftime("%X %x %Z"))
     greenlets = [
         gevent.spawn(sds011.get_indoor_stats),
         gevent.spawn(indoorweather.get_tempandhumidity),
@@ -22,10 +24,10 @@ def get_all_stats():
 
 
 def scheduler(interval):
-    """runs schedule for functions
+    """Runs schedule for functions
 
     Args:
-        interval (int): time in seconds
+        interval (int): Delay between polling sensors in seconds
     """
     while True:
         before = time.time()
@@ -42,8 +44,13 @@ def scheduler(interval):
 
 
 def main():
-    scheduler(200)
+    """Main"""
+    scheduler(300)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+
+    except KeyboardInterrupt:
+        sys.exit()
