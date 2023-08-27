@@ -37,3 +37,6 @@ This project was created to monitor the temperature, humidity, and particulate d
 The SDS011 sensor is ponderous, and not all of its *features* are outlined very well in the data sheet. By default the sensor will be set to active mode and will take readings once every couple of seconds until it loses power. However the diode inside only has an 8000 hour lifespan, or around 1 year. The easiest way to prolong this is to send a *sleep* signal to the sensor when not using it, then sending a *wake* signal when it is time to measure. In this code I have it set to grab metrics from each sensor and the Open Weather API every 5 minutes, and am putting the SDS011 sensor asleep in between. This has the dual purpose of not exceeding the daily 1000 API call limit set by Open Weather, as every reading makes two calls. 
 
 The SDS011 also needs some time to clear out the sensor chamber before taking an accurate reading, and cannot make more than 1 reading every 3 seconds. If you experience a strange delay in the indoor AQI readings as compared to the other readings, this is why. Additionally, please note that this sensor is little endian, and prefers a 9600 baud.
+
+
+
