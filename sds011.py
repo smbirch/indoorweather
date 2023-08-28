@@ -128,7 +128,7 @@ def sensor_read():
 
 def get_indoor_stats():
     set_sensor_work()
-    time.sleep(15)  # clear the sensor for more before an accurate reading
+    time.sleep(15)  # clear the sensor chamber for more accurate reading
     sensor_read()
     time.sleep(1)
     sensor_sleep()
@@ -137,18 +137,26 @@ def get_indoor_stats():
 
 
 def convert_to_aqi(pmtwofive, pmten):
-    indooraqi = aqi.to_aqi(
-        [
-            (aqi.POLLUTANT_PM25, pmtwofive),
-            (aqi.POLLUTANT_PM10, pmten),
-        ]
-    )
+    # This is causing the aqi to always be equal to pmtwofive...
+    # if pmtwofive or pmten > 500:
+    #     return pmtwofive
+    try:
+        indooraqi = aqi.to_aqi(
+            [
+                (aqi.POLLUTANT_PM25, pmtwofive),
+                (aqi.POLLUTANT_PM10, pmten),
+            ]
+        )
+    except Exception as e:
+        print(f"Error converting indoor aqi: \n{e}\n")
+        print("Returning no data")
+        return
     return indooraqi
 
 
 def main():
     set_sensor_work()
-    time.sleep(15)  # clear the sensor for more before an accurate reading
+    time.sleep(15)  # clear the sensor chamber for more accurate reading
     sensor_read()
     time.sleep(1)
     sensor_sleep()
