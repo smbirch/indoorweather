@@ -66,7 +66,6 @@ def convert_to_aqi(pm2_5, pm10):
     convertedaqi = aqi.to_aqi(
         [
             (aqi.POLLUTANT_PM25, pm2_5),
-            (aqi.POLLUTANT_PM10, pm10),
         ]
     )
     return convertedaqi

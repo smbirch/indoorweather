@@ -7,3 +7,4 @@ __pycache__
 !.vscode/*.code-snippets
 **/.vscode/
 config.ini
+nohup.out
