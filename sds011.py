@@ -32,6 +32,7 @@ def send_command(bytes_data):
         ser.write(bytes_data)
     except Exception as e:
         print(f"Error sending message: {e}")
+        # josh wsa here
 
 
 def calculate_checksum(data):
