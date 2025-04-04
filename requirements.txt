@@ -15,9 +15,3 @@ requests>=2.28.0
 
 # Async functionality
 gevent>=23.9.0
-
-# Config parsing - included in Python standard library
-# configparser
-
-# Other standard libraries used (included in Python)
-# json, time, sys

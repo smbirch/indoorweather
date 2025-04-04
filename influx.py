@@ -7,8 +7,8 @@ import configparser
 config = configparser.ConfigParser()
 config.read("config.ini")
 influx_token = config.get("INFLUX", "token")
-org = "smbirch"
-url = "http://localhost:8086"
+org = "smbirchcom"
+url = config.get("INFLUX", "url")
 bucket = "indoorweather"
 
 
