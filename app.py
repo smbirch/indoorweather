@@ -1,14 +1,14 @@
 import time
 import sys
 
+import outdoorweather
+import sds011
+import indoorweather
+
 import gevent
 from gevent import monkey
 
 monkey.patch_all()
-
-import outdoorweather
-import sds011
-import indoorweather
 
 
 def get_all_stats():
