@@ -1,5 +1,4 @@
 FROM python:3.12-slim
-
 # Install build dependencies and GPIO libraries
 RUN apt-get update && apt-get install -y \
     build-essential \

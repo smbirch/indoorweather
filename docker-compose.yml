@@ -14,8 +14,8 @@ services:
       - ./config.ini:/app/config.ini  # Mount config file
     networks:
       - monitoring-network
-    depends_on:
-      - influxdb
+    dns:
+      - 192.168.1.46
 
   # Your existing containers (commented out since you said they're already set up)
   # influxdb:
