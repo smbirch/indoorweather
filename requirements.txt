@@ -1,0 +1,23 @@
+# Serial communication
+pyserial>=3.5
+
+# Air quality calculation
+python-aqi>=0.6.1
+
+# Data storage
+influxdb-client>=1.36.0
+
+# Weather sensor
+Adafruit_DHT>=1.4.0
+
+# HTTP requests for weather API
+requests>=2.28.0
+
+# Async functionality
+gevent>=23.9.0
+
+# Config parsing - included in Python standard library
+# configparser
+
+# Other standard libraries used (included in Python)
+# json, time, sys
